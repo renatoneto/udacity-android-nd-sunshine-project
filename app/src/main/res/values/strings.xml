@@ -3,6 +3,21 @@
 
     <string name="app_name">Sunshine</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Configuração</string>
+    <string name="action_location">Localização</string>
+    <string name="action_share">Compartilhar</string>
+    <string name="action_refresh" translatable="false">Atualizar</string>
+
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_settings">Configuração</string>
+
+    <string name="pref_location_label">Localização</string>
+    <string name="pref_location_key" translatable="false">location</string>
+    <string name="pref_location_default" translatable="false">Guarujá</string>
+
+    <string name="pref_unit_label">Unidade de temperatura</string>
+    <string name="pref_unit_key" translatable="false">unit</string>
+    <string name="pref_unit_metric" translatable="false">metric</string>
+    <string name="pref_unit_imperial" translatable="false">imperial</string>
 
 </resources>
