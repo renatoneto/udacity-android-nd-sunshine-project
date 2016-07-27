@@ -259,7 +259,7 @@ public class ForecastFragment extends Fragment implements AdapterView.OnItemClic
 
             String format = "json";
             String units  = "metric";
-            String appId  = "";
+            String appId  = "your_token_here";
             int days      = 7;
 
             try {
