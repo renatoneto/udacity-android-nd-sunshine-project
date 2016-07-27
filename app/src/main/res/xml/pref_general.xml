@@ -7,16 +7,14 @@
         android:title="@string/pref_location_label"
         android:key="@string/pref_location_key"
         android:defaultValue="@string/pref_location_default"
-        android:inputType="textCapWords"
+        android:inputType="text"
         android:singleLine="true" />
 
     <ListPreference
-        android:title="@string/pref_unit_label"
-        android:key="@string/pref_unit_key"
-        android:defaultValue="@string/pref_unit_metric"
-        android:entries="@array/units_options"
-        android:entryValues="@array/units_values"
-        android:summary="%s"
-        />
+        android:title="@string/pref_units_label"
+        android:key="@string/pref_units_key"
+        android:defaultValue="@string/pref_units_metric"
+        android:entryValues="@array/pref_units_values"
+        android:entries="@array/pref_units_options" />
 
 </PreferenceScreen>
