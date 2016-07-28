@@ -114,26 +114,7 @@ public class TestDb extends AndroidTestCase {
         also make use of the ValidateCurrentRecord function from within TestUtilities.
     */
     public void testLocationTable() {
-
-        SQLiteDatabase db = new WeatherDbHelper(
-                this.mContext).getWritableDatabase();
-
         insertLocation();
-
-        Cursor cursor = db.query(
-            WeatherContract.LocationEntry.TABLE_NAME, null, null, null, null, null, null
-        );
-
-        assertTrue("Error: no records returned from location query", cursor.moveToFirst());
-
-        ContentValues contentValues = TestUtilities.createNorthPoleLocationValues();
-        TestUtilities.validateCurrentRecord("Error: invalid location data", cursor, contentValues);
-
-        assertFalse("Error: more than one record returned from location query", cursor.moveToNext());
-
-        cursor.close();
-        db.close();
-
     }
 
     /*
@@ -158,7 +139,7 @@ public class TestDb extends AndroidTestCase {
         assertTrue(weatherRowId != -1);
 
         Cursor cursor = db.query(
-            WeatherContract.LocationEntry.TABLE_NAME, null, null, null, null, null, null
+            WeatherContract.WeatherEntry.TABLE_NAME, null, null, null, null, null, null
         );
 
         assertTrue("Error: no records returned from weather query", cursor.moveToFirst());
@@ -189,6 +170,19 @@ public class TestDb extends AndroidTestCase {
         locationRowId = db.insert(WeatherContract.LocationEntry.TABLE_NAME, null, contentValues);
 
         assertTrue(locationRowId != -1);
+
+        Cursor cursor = db.query(
+                WeatherContract.LocationEntry.TABLE_NAME, null, null, null, null, null, null
+        );
+
+        assertTrue("Error: no records returned from location query", cursor.moveToFirst());
+
+        TestUtilities.validateCurrentRecord("Error: invalid location data", cursor, contentValues);
+
+        assertFalse("Error: more than one record returned from location query", cursor.moveToNext());
+
+        cursor.close();
+        db.close();
 
         return locationRowId;
 
