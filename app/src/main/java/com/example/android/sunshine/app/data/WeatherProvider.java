@@ -272,6 +272,8 @@ public class WeatherProvider extends ContentProvider {
 
         int affectedRows;
 
+        if (null == selection) selection = "1";
+
         switch (match) {
             case WEATHER: {
 
