@@ -29,15 +29,22 @@ public class MainActivity extends ActionBarActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
+    private String mLocation;
+
+    private static String FORECASTFRAGMENT_TAG = "FORECASTFRAGMENT_TAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new ForecastFragment())
+                    .add(R.id.container, new ForecastFragment(), FORECASTFRAGMENT_TAG)
                     .commit();
         }
+
+        mLocation = Utility.getPreferredLocation(this);
     }
 
     @Override
@@ -45,6 +52,23 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String preferredLocation = Utility.getPreferredLocation(this);
+
+        if (!mLocation.equals(preferredLocation)) {
+
+            ForecastFragment ff = (ForecastFragment) getSupportFragmentManager()
+                    .findFragmentByTag(FORECASTFRAGMENT_TAG);
+
+            ff.onLocationChanged();
+            mLocation = preferredLocation;
+
+        }
     }
 
     @Override
