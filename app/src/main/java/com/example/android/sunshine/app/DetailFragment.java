@@ -147,7 +147,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
             boolean isMetric = Utility.isMetric(getActivity());
             int weatherId = data.getInt(COL_WEATHER_CONDITION_ID);
 
-            mIconView.setImageResource(R.drawable.ic_launcher);
+            mIconView.setImageResource(
+                    Utility.getArtResourceForWeatherCondition(weatherId)
+            );
 
             String description = data.getString(COL_WEATHER_DESC);
             mDescriptionView.setText(description);
