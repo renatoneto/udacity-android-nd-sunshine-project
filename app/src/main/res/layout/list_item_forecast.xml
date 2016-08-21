@@ -5,7 +5,8 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:padding="@dimen/list_item_padding">
+    android:padding="@dimen/list_item_padding"
+    android:background="@drawable/touch_selector">
 
     <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/list_item_icon"
