@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.android.sunshine.app.data.WeatherContract;
-
-import org.w3c.dom.Text;
-
 /**
  * {@link ForecastAdapter} exposes a list of weather forecasts
  * from a {@link android.database.Cursor} to a {@link android.widget.ListView}.
@@ -53,6 +49,9 @@ public class ForecastAdapter extends CursorAdapter {
 
         View view = LayoutInflater.from(context).inflate(layoutId, parent, false);
 
+        final ViewHolder viewHolder = new ViewHolder(view);
+        view.setTag(viewHolder);
+
         return view;
     }
 
@@ -61,31 +60,47 @@ public class ForecastAdapter extends CursorAdapter {
      */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        // our view is pretty simple here --- just a text view
-        // we'll keep the UI functional with a simple (and slow!) binding.
 
-        ImageView iconImageView = (ImageView) view.findViewById(R.id.list_item_icon);
-        TextView dateTextView = (TextView) view.findViewById(R.id.list_item_date_textview);
-        TextView forecastTextView = (TextView) view.findViewById(R.id.list_item_forecast_textview);
-        TextView highTextView = (TextView) view.findViewById(R.id.list_item_high_textview);
-        TextView lowTextView = (TextView) view.findViewById(R.id.list_item_low_textview);
+        final ViewHolder viewHolder = (ViewHolder) view.getTag();
 
         boolean isMetric = Utility.isMetric(mContext);
 
-        iconImageView.setImageResource(R.drawable.ic_launcher);
+        viewHolder.iconView.setImageResource(R.drawable.ic_launcher);
 
-        dateTextView.setText(Utility.getFriendlyDayString(
+        viewHolder.dateView.setText(Utility.getFriendlyDayString(
                 mContext, cursor.getLong(ForecastFragment.COL_WEATHER_DATE)
         ));
 
-        forecastTextView.setText(cursor.getString(ForecastFragment.COL_WEATHER_DESC));
-        highTextView.setText(Utility.formatTemperature(
+        viewHolder.descriptionView.setText(cursor.getString(ForecastFragment.COL_WEATHER_DESC));
+
+        viewHolder.highTempView.setText(Utility.formatTemperature(
+                mContext,
                 cursor.getDouble(ForecastFragment.COL_WEATHER_MAX_TEMP), isMetric
         ));
 
-        lowTextView.setText(Utility.formatTemperature(
+        viewHolder.lowTempView.setText(Utility.formatTemperature(
+                mContext,
                 cursor.getDouble(ForecastFragment.COL_WEATHER_MIN_TEMP), isMetric
         ));
 
     }
+
+    public static class ViewHolder {
+
+        public final ImageView iconView;
+        public final TextView dateView;
+        public final TextView descriptionView;
+        public final TextView highTempView;
+        public final TextView lowTempView;
+
+        public ViewHolder(View view) {
+            iconView = (ImageView) view.findViewById(R.id.list_item_icon);
+            dateView = (TextView) view.findViewById(R.id.list_item_date_textview);
+            descriptionView = (TextView) view.findViewById(R.id.list_item_forecast_textview);
+            highTempView = (TextView) view.findViewById(R.id.list_item_high_textview);
+            lowTempView = (TextView) view.findViewById(R.id.list_item_low_textview);
+        }
+
+    }
+
 }

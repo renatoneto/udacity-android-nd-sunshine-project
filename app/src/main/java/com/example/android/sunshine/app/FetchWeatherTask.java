@@ -71,7 +71,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
                 new String[]{locationSetting},
                 null);
 
-        if (locationCursor.moveToFirst()) {
+        if (locationCursor != null && locationCursor.moveToFirst()) {
             int locationIdIndex = locationCursor.getColumnIndex(WeatherContract.LocationEntry._ID);
             locationId = locationCursor.getLong(locationIdIndex);
         } else {
@@ -96,7 +96,10 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
             locationId = ContentUris.parseId(insertedUri);
         }
 
-        locationCursor.close();
+        if (locationCursor != null && !locationCursor.isClosed()) {
+            locationCursor.close();
+        }
+
         // Wait, that worked?  Yes!
         return locationId;
     }
@@ -309,7 +312,8 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
                 // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
                 // But it does make debugging a *lot* easier if you print out the completed
                 // buffer for debugging.
-                buffer.append(line + "\n");
+                buffer.append(line);
+                buffer.append("\n");
             }
 
             if (buffer.length() == 0) {
