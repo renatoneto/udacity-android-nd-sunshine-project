@@ -27,24 +27,36 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
     private String mLocation;
 
-    private static String FORECASTFRAGMENT_TAG = "FORECASTFRAGMENT_TAG";
+    private boolean mTwoPane;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mLocation = Utility.getPreferredLocation(this);
+
         setContentView(R.layout.activity_main);
 
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new ForecastFragment(), FORECASTFRAGMENT_TAG)
-                    .commit();
+        if (findViewById(R.id.weather_detail_container) != null) {
+
+            mTwoPane = true;
+
+            if (savedInstanceState == null) {
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.weather_detail_container, new DetailFragment(), DETAILFRAGMENT_TAG)
+                        .commit();
+
+            }
+
+        } else {
+            mTwoPane = false;
         }
 
-        mLocation = Utility.getPreferredLocation(this);
     }
 
     @Override
@@ -60,12 +72,15 @@ public class MainActivity extends ActionBarActivity {
 
         String preferredLocation = Utility.getPreferredLocation(this);
 
-        if (!mLocation.equals(preferredLocation)) {
+        if (preferredLocation != null & !mLocation.equals(preferredLocation)) {
 
-            ForecastFragment ff = (ForecastFragment) getSupportFragmentManager()
-                    .findFragmentByTag(FORECASTFRAGMENT_TAG);
+            ForecastFragment ff = (ForecastFragment)getSupportFragmentManager()
+                    .findFragmentById(R.id.fragment_forecast);
 
-            ff.onLocationChanged();
+            if (ff != null) {
+                ff.onLocationChanged();
+            }
+
             mLocation = preferredLocation;
 
         }
