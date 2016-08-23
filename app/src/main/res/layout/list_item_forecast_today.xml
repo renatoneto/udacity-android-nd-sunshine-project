@@ -5,15 +5,14 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:padding="@dimen/list_item_padding"
-    android:background="@drawable/touch_selector">
+    android:background="@drawable/today_touch_selector">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
-        android:paddingLeft="@dimen/list_item_padding">
+        android:paddingLeft="60dp"
+        android:layout_weight="1">
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_date_textview"
@@ -21,6 +20,8 @@
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/list_item_text_padding_bottom"
             android:gravity="center"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/white"
             android:text="Today, June 24"/>
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,14 +29,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/list_item_text_padding_bottom"
-            android:gravity="center"
+
+            android:fontFamily="sans-serif-light"
+            android:textSize="72sp"
+            android:textColor="@android:color/white"
+
             android:text="21º"/>
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_low_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="left"
+
+            android:fontFamily="sans-serif-light"
+            android:textSize="36sp"
+            android:textColor="@android:color/white"
             android:text="8º"/>
 
     </LinearLayout>
@@ -48,10 +57,10 @@
 
         <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_launcher" />
-
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_forecast_textview"

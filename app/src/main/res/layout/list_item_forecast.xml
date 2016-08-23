@@ -5,31 +5,41 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    android:padding="@dimen/list_item_padding"
     android:background="@drawable/touch_selector">
 
-    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/list_item_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <FrameLayout
+        android:layout_width="@dimen/list_item_icon_parent_width"
+        android:layout_height="wrap_content">
+
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/list_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
+        android:layout_weight="7"
         android:paddingLeft="@dimen/list_item_padding">
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_date_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/list_item_text_padding_bottom" />
+            android:paddingBottom="@dimen/list_item_text_padding_bottom"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/black"/>
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_forecast_textview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/black"/>
 
     </LinearLayout>
 
@@ -37,18 +47,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="0">
+        android:gravity="center"
+        android:layout_weight="5">
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_high_textview"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/list_item_text_padding_bottom" />
+            android:paddingBottom="@dimen/list_item_text_padding_bottom"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@android:color/black"/>
 
         <TextView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/list_item_low_textview"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/black"/>
 
     </LinearLayout>
 
